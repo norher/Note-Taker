@@ -9,7 +9,7 @@ router.post('/notes', (req, res) => {
             text,
             id: uuid(),
         };
-        readAppend(note, '/db/db.json');
+        readAppend(note, './db/db.json');
         res.json("Note Saved!")
     } else {
         res.error('No note was saved');
@@ -31,5 +31,17 @@ router.delete('/notes/:id', (req, res) => {
             console.log('Note deleted');
         });
 })
+
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'))
+});
+
+router.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/notes.html'))
+});
+
+router.get('*', (req, res) => {
+    res.send('<h1>Notes App Failed to Load</h1>');
+});
 
 module.exports = router;
