@@ -19,6 +19,10 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/notes.html'))
 });
 
+app.get('*', (req, res) => {
+    res.send('<h1>Notes App Failed to Load</h1>');
+});
+
 app.listen(PORT, () => {
     console.log(`Server listeing on http://localhost:${PORT}`);
 })
